@@ -202,13 +202,13 @@ graph LR
 
 ## Security Model
 
-| Boundary | Mechanism |
-|---|---|
-| Plugin isolation | SES `Compartment` — no shared globals, no prototype access |
-| Key material | `KeyProvider` never passed to plugins; plugins call `requestSigning` endowment which routes through the pipeline |
-| Network access | Scoped `fetch` endowment via `RpcProvider`; no arbitrary outbound requests |
-| Permissions | Declared in manifest, enforced at every capability call |
-| Audit | Every signing attempt and plugin call is logged to an append-only `AuditEntry` store |
+| Boundary         | Mechanism                                                                                                        |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Plugin isolation | SES `Compartment` — no shared globals, no prototype access                                                       |
+| Key material     | `KeyProvider` never passed to plugins; plugins call `requestSigning` endowment which routes through the pipeline |
+| Network access   | Scoped `fetch` endowment via `RpcProvider`; no arbitrary outbound requests                                       |
+| Permissions      | Declared in manifest, enforced at every capability call                                                          |
+| Audit            | Every signing attempt and plugin call is logged to an append-only `AuditEntry` store                             |
 
 The test suite includes adversarial sandbox escape attempts covering `process` access, prototype pollution, constructor chain escapes, dynamic import, `eval`/`Function`, infinite loops, memory bombs, and endowment boundary violations.
 
@@ -216,28 +216,28 @@ The test suite includes adversarial sandbox escape attempts covering `process` a
 
 ## Toolchain
 
-| Tool | Purpose |
-|---|---|
-| [pnpm](https://pnpm.io) | Package manager + workspaces |
-| [Turborepo](https://turbo.build) | Monorepo build orchestration with caching |
+| Tool                                         | Purpose                                                                |
+| -------------------------------------------- | ---------------------------------------------------------------------- |
+| [pnpm](https://pnpm.io)                      | Package manager + workspaces                                           |
+| [Turborepo](https://turbo.build)             | Monorepo build orchestration with caching                              |
 | [TypeScript](https://www.typescriptlang.org) | Strict mode (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`) |
-| [Vitest](https://vitest.dev) | Fast, native ESM test runner |
-| [ESLint](https://eslint.org) | Static analysis with `@typescript-eslint` |
-| [Prettier](https://prettier.io) | Consistent code formatting |
-| [Zod](https://zod.dev) | Runtime schema validation with inferred TypeScript types |
-| [@endo/ses](https://github.com/endojs/endo) | Hardened JavaScript compartments |
+| [Vitest](https://vitest.dev)                 | Fast, native ESM test runner                                           |
+| [ESLint](https://eslint.org)                 | Static analysis with `@typescript-eslint`                              |
+| [Prettier](https://prettier.io)              | Consistent code formatting                                             |
+| [Zod](https://zod.dev)                       | Runtime schema validation with inferred TypeScript types               |
+| [@endo/ses](https://github.com/endojs/endo)  | Hardened JavaScript compartments                                       |
 
 ---
 
 ## Roadmap
 
-| Phase | Status | Scope |
-|---|---|---|
-| 0 — Monorepo Skeleton | In Progress | Workspace setup, `@ea/types`, `@ea/common` |
-| 1 — Core Runtime | Pending | Plugin loader, SES sandbox, KeyProvider, signing pipeline, RPC provider |
-| 2 — Chain Plugins | Pending | Bitcoin, Solana, phishing detection |
-| 3 — Reference Wallet | Pending | Next.js UI: send flow, simulation confirmation, plugin management, audit log |
-| 4 — Testing & Hardening | Pending | Adversarial sandbox tests, pipeline edge cases, chain plugin test pyramid, Playwright E2E |
+| Phase                   | Status      | Scope                                                                                     |
+| ----------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| 0 — Monorepo Skeleton   | In Progress | Workspace setup, `@ea/types`, `@ea/common`                                                |
+| 1 — Core Runtime        | Pending     | Plugin loader, SES sandbox, KeyProvider, signing pipeline, RPC provider                   |
+| 2 — Chain Plugins       | Pending     | Bitcoin, Solana, phishing detection                                                       |
+| 3 — Reference Wallet    | Pending     | Next.js UI: send flow, simulation confirmation, plugin management, audit log              |
+| 4 — Testing & Hardening | Pending     | Adversarial sandbox tests, pipeline edge cases, chain plugin test pyramid, Playwright E2E |
 
 ---
 
