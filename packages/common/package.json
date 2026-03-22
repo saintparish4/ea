@@ -20,5 +20,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@ea/types": "workspace:^",
+    "zod": "^4.3.6"
+  }
 }

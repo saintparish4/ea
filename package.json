@@ -2,6 +2,7 @@
   "name": "ea",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Ea — Chain-agnostic sandboxed plugin runtime for wallets",
   "main": "index.js",
   "scripts": {
