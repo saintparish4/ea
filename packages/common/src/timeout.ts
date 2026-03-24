@@ -35,8 +35,8 @@ export async function withTimeout<T>(
       } satisfies TimeoutError);
     }
 
-    throw cause; 
+    throw cause;
   }
 }
 
-class _TimeoutSignal {} 
+class _TimeoutSignal {}

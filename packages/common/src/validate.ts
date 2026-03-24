@@ -11,9 +11,7 @@ export function validate<T>(schema: ZodSchema<T>, data: unknown): Result<T, Vali
 
   const firstIssue = parsed.error.issues[0];
   const field =
-    firstIssue !== undefined && firstIssue.path.length > 0
-      ? firstIssue.path.join(".")
-      : undefined;
+    firstIssue !== undefined && firstIssue.path.length > 0 ? firstIssue.path.join(".") : undefined;
 
   const error: ValidationError =
     field !== undefined
@@ -35,5 +33,3 @@ export function validate<T>(schema: ZodSchema<T>, data: unknown): Result<T, Vali
 export function validateOrThrow<T>(schema: ZodSchema<T>, data: unknown): T {
   return schema.parse(data);
 }
-
-

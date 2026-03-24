@@ -42,6 +42,12 @@ export interface SecurityBlockError extends BaseError {
   readonly reason: string;
 }
 
+export interface NetworkError extends BaseError {
+  readonly code: "NETWORK_ERROR";
+  readonly endpoint?: string;
+  readonly statusCode?: number;
+}
+
 export interface PluginError extends BaseError {
   readonly code: "PLUGIN_ERROR";
   readonly pluginId: string;
@@ -50,6 +56,7 @@ export interface PluginError extends BaseError {
 export type EaError =
   | SandboxError
   | PermissionError
+  | NetworkError
   | ValidationError
   | TimeoutError
   | SecurityBlockError

@@ -23,6 +23,8 @@
   ],
   "dependencies": {
     "@ea/common": "workspace:^",
-    "@ea/types": "workspace:^"
+    "@ea/types": "workspace:^",
+    "@types/node": "^25.5.0",
+    "ses": "^1.15.0"
   }
 }
