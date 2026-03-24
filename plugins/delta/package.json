@@ -1,13 +1,13 @@
 {
-  "name": "@ea/runtime",
-  "version": "0.0.0",
+  "name": "@ea/plugin-delta",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
-  "types": "./src/index.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
   },
@@ -22,9 +22,9 @@
     "dist"
   ],
   "dependencies": {
-    "@ea/common": "workspace:^",
-    "@ea/types": "workspace:^",
-    "@types/node": "^25.5.0",
-    "ses": "^1.15.0"
+    "@ea/types": "workspace:^"
+  },
+  "devDependencies": {
+    "@ea/runtime": "workspace:^"
   }
 }

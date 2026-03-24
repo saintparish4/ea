@@ -78,6 +78,16 @@ importers:
         specifier: workspace:^
         version: link:../../packages/types
 
+  plugins/delta:
+    dependencies:
+      '@ea/types':
+        specifier: workspace:^
+        version: link:../../packages/types
+    devDependencies:
+      '@ea/runtime':
+        specifier: workspace:^
+        version: link:../../packages/runtime
+
   plugins/phishing:
     dependencies:
       '@ea/types':
