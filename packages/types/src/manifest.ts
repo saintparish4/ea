@@ -2,6 +2,8 @@ import { z } from "zod";
 
 export const PermissionSchema = z.enum([
   "network:fetch",
+  "network:esplora",
+  "network:solana-rpc",
   "crypto:randomValues",
   "console:log",
   "accounts:read",

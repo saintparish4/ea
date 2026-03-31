@@ -1,7 +1,7 @@
 import { PluginManifestSchema } from "@ea/types";
 
 export const manifest = PluginManifestSchema.parse({
-  id: "ea.plugin.phishing",
+  id: "ea-plugin-phishing",
   version: "0.1.0",
   name: "Phishing Detection",
   type: "security",
@@ -9,4 +9,5 @@ export const manifest = PluginManifestSchema.parse({
   endowments: [],
   supportedChains: [],
   capabilities: ["SecurityPlugin"],
+  entryPoint: "./src/index",
 });

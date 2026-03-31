@@ -1,5 +1,6 @@
 import * as bitcoin from "bitcoinjs-lib";
 import type { TransactionBuilder, TxParams, UnsignedTx, Result, PluginError } from "@ea/types";
+import { esploraApiBase } from "./esplora";
 
 interface Utxo {
   txid: string;
@@ -57,7 +58,7 @@ export class BitcoinTxBuilder implements TransactionBuilder {
   }
 
   private async fetchUtxos(address: string): Promise<Utxo[]> {
-    const res = await fetch(`/address/${address}/utxo`);
+    const res = await fetch(`${esploraApiBase(this.network)}/address/${address}/utxo`);
     if (!res.ok) return [];
     return (await res.json()) as Utxo[];
   }

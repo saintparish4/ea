@@ -3,6 +3,7 @@ import * as ecc from "tiny-secp256k1";
 import { BIP32Factory } from "bip32";
 import { mnemonicToSeedSync } from "bip39";
 import type { AccountProvider, Account, Balance, Result, PluginError } from "@ea/types";
+import { esploraApiBase } from "./esplora";
 
 const bip32 = BIP32Factory(ecc);
 
@@ -39,7 +40,7 @@ export class BitcoinAccountProvider implements AccountProvider {
   }
 
   async getBalance(address: string): Promise<Result<Balance, PluginError>> {
-    const res = await fetch(`/address/${address}`);
+    const res = await fetch(`${esploraApiBase(this.network)}/address/${address}`);
     if (!res.ok) {
       return {
         ok: false,

@@ -1,0 +1,45 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run --config vitest.config.ts",
+    "test:e2e": "playwright test",
+    "lint": "eslint app tests e2e next.config.ts playwright.config.ts vitest.config.ts"
+  },
+  "dependencies": {
+    "@ea/common": "workspace:^",
+    "@ea/plugin-bitcoin": "workspace:^",
+    "@ea/plugin-phishing": "workspace:^",
+    "@ea/plugin-solana": "workspace:^",
+    "@ea/runtime": "workspace:^",
+    "@ea/types": "workspace:^",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^5.1.0",
+    "jsdom": "^29.0.1",
+    "next": "16.2.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "vite-tsconfig-paths": "^6.1.1",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.1",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^3.1.4"
+  }
+}
