@@ -1,3 +1,11 @@
+/**
+ * Plugin capability contracts and signing-pipeline types for @ea/types.
+ *
+ * This module is the single source of truth for transaction lifecycle types
+ * (unsigned tx, simulation, pre/post-sign security context). Former
+ * `pipeline.ts` definitions were merged here so plugins, runtime, and UI share
+ * one shape.
+ */
 import type { Result } from "./result";
 import type { PluginError } from "./errors";
 
@@ -43,6 +51,8 @@ export interface SimulationResult {
   outputs: SimulationEntry[];
   sideEffects: string[];
   warnings: string[];
+  /** RPC or node simulation logs (e.g. Solana), optional. */
+  rawLogs?: string[];
 }
 
 export interface SignablePayload {
@@ -64,6 +74,8 @@ export interface PreSignContext {
   toAddress: string;
   amount: bigint;
   chain: string;
+  /** When set (e.g. by wallet), security plugins can relate `to` to any owned account. */
+  senderAccounts?: Account[];
 }
 
 export interface PostSignContext {

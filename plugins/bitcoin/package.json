@@ -1,14 +1,14 @@
 {
   "name": "@ea/plugin-bitcoin",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "src/index.ts",
+      "import": "src/index.ts"
     }
   },
   "scripts": {
@@ -19,9 +19,16 @@
     "clean": "rimraf dist"
   },
   "files": [
-    "dist"
+    "src"
   ],
   "dependencies": {
-    "@ea/types": "workspace:^"
+    "@ea/common": "workspace:^",
+    "@ea/types": "workspace:^",
+    "bip32": "^5.0.1",
+    "bip39": "^3.1.0",
+    "bitcoinjs-lib": "^7.0.1",
+    "ecpair": "^3.0.1",
+    "tiny-secp256k1": "^2.2.4",
+    "zod": "^4.3.6"
   }
 }
