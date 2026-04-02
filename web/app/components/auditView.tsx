@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useAuditStore } from "@/app/lib/store/audit-store";
 import { AuditEntryRow } from "@/app/components/audit-entry-row";
 
@@ -15,9 +16,14 @@ const OPERATIONS = [
 ] as const;
 
 export function AuditView() {
-  const { filters, page, setFilter, setPage, pageCount, currentPage } = useAuditStore();
+  const { filters, page, setFilter, setPage, pageCount, currentPage, seedSamplesIfEmpty } =
+    useAuditStore();
   const entries = currentPage();
   const totalPages = pageCount();
+
+  useEffect(() => {
+    seedSamplesIfEmpty();
+  }, [seedSamplesIfEmpty]);
 
   return (
     <section>
@@ -67,26 +73,25 @@ export function AuditView() {
       {entries.length === 0 ? (
         <p className="text-sm text-gray-500">No audit entries match the current filters.</p>
       ) : (
-        <div className="overflow-x-auto rounded-[var(--radius-card)] border border-gray-200 bg-white">
-          <table className="min-w-full text-sm">
-            <thead className="border-b border-gray-200 bg-gray-50">
-              <tr>
-                {["Time", "Plugin", "Operation", "Stage", "Duration", "Result"].map((h) => (
-                  <th
-                    key={h}
-                    className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {entries.map((entry) => (
-                <AuditEntryRow key={entry.id} entry={entry} />
-              ))}
-            </tbody>
-          </table>
+        <div className="overflow-x-auto rounded-[var(--radius-card)] border border-slate-200 bg-white">
+          <div
+            className="grid items-center px-2 py-3 bg-slate-50/50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase tracking-wider"
+            style={{
+              gridTemplateColumns: "56px minmax(250px,1fr) 140px 100px 140px 56px",
+            }}
+          >
+            <div className="text-center">Status</div>
+            <div>Operation / Plugin</div>
+            <div>Stage</div>
+            <div className="text-right">Duration</div>
+            <div className="text-right pr-4">Time</div>
+            <div />
+          </div>
+          <div className="divide-y divide-slate-100">
+            {entries.map((entry) => (
+              <AuditEntryRow key={entry.id} entry={entry} />
+            ))}
+          </div>
         </div>
       )}
 

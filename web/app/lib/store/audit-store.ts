@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 import type { AuditEntry } from "@ea/types";
+import { sampleAuditEntries } from "@/app/lib/sample-audit-entries";
 
 const PAGE_SIZE = 50;
 
@@ -17,6 +18,8 @@ interface AuditState {
   filters: AuditFilters;
   page: number;
   addEntry: (entry: AuditEntry) => void;
+  /** Dev / empty log: load sample rows once so the audit UI is reviewable without a live pipeline. */
+  seedSamplesIfEmpty: () => void;
   setFilter: (patch: Partial<AuditFilters>) => void;
   setPage: (page: number) => void;
   filteredEntries: () => AuditEntry[];
@@ -38,6 +41,14 @@ export const useAuditStore = create<AuditState>((set, get) => ({
 
   addEntry(entry) {
     set((state) => ({ entries: [entry, ...state.entries].slice(0, 5_000) }));
+  },
+
+  seedSamplesIfEmpty() {
+    if (process.env.NODE_ENV !== "development") return;
+    set((state) => {
+      if (state.entries.length > 0) return state;
+      return { entries: [...sampleAuditEntries] };
+    });
   },
 
   setFilter(patch) {
