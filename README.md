@@ -1,5 +1,7 @@
 # Ea
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 **Chain-agnostic sandboxed plugin runtime for wallets.**
 
 Ea is a TypeScript monorepo that provides a secure, extensible foundation for building multi-chain wallets. Plugins run in isolated [SES](https://github.com/endojs/endo/tree/master/packages/ses) compartments, communicate through typed capability interfaces, and are gated by a signing pipeline with built-in audit logging and security checks.
@@ -10,7 +12,7 @@ Ea is a TypeScript monorepo that provides a secure, extensible foundation for bu
 
 ```mermaid
 graph TB
-  subgraph apps [apps/wallet — Next.js]
+  subgraph web [web — Next.js reference wallet]
     WalletUI[Reference Wallet UI]
   end
 
@@ -78,9 +80,9 @@ ea/
 ├── plugins/
 │   ├── bitcoin/        # @ea/plugin-bitcoin   — BIP32/44/84, P2WPKH, Esplora simulation
 │   ├── solana/         # @ea/plugin-solana    — SOL/SPL transfers, RPC simulation
-│   └── phishing/       # @ea/plugin-phishing  — threat list + heuristic security checks
-├── apps/
-│   └── wallet/         # Next.js reference wallet
+│   ├── phishing/       # @ea/plugin-phishing  — threat list + heuristic security checks
+│   └── delta/          # hello-world utility plugin — validates the full runtime lifecycle
+├── web/                # Next.js reference wallet
 ├── turbo.json
 ├── pnpm-workspace.yaml
 ├── tsconfig.base.json
@@ -229,18 +231,6 @@ The test suite includes adversarial sandbox escape attempts covering `process` a
 
 ---
 
-## Roadmap
-
-| Phase                   | Status      | Scope                                                                                     |
-| ----------------------- | ----------- | ----------------------------------------------------------------------------------------- |
-| 0 — Monorepo Skeleton   | In Progress | Workspace setup, `@ea/types`, `@ea/common`                                                |
-| 1 — Core Runtime        | Pending     | Plugin loader, SES sandbox, KeyProvider, signing pipeline, RPC provider                   |
-| 2 — Chain Plugins       | Pending     | Bitcoin, Solana, phishing detection                                                       |
-| 3 — Reference Wallet    | Pending     | Next.js UI: send flow, simulation confirmation, plugin management, audit log              |
-| 4 — Testing & Hardening | Pending     | Adversarial sandbox tests, pipeline edge cases, chain plugin test pyramid, Playwright E2E |
-
----
-
 ## License
 
-Private — part of the Ordinal Scale project.
+[MIT](LICENSE) © Bluesky Labs

@@ -40,27 +40,35 @@ export class BitcoinAccountProvider implements AccountProvider {
   }
 
   async getBalance(address: string): Promise<Result<Balance, PluginError>> {
-    const res = await fetch(`${esploraApiBase(this.network)}/address/${address}`);
-    if (!res.ok) {
+    try {
+      const res = await fetch(`${esploraApiBase(this.network)}/address/${address}`);
+      if (!res.ok) {
+        return {
+          ok: false,
+          error: {
+            code: "PLUGIN_ERROR",
+            pluginId: "bitcoin",
+            message: `HTTP ${res.status}`,
+          },
+        };
+      }
+      const data = (await res.json()) as {
+        chain_stats: { funded_txo_sum: number; spent_txo_sum: number };
+      };
       return {
-        ok: false,
-        error: {
-          code: "PLUGIN_ERROR",
-          pluginId: "bitcoin",
-          message: `HTTP ${res.status}`,
+        ok: true,
+        value: {
+          amount: BigInt(data.chain_stats.funded_txo_sum - data.chain_stats.spent_txo_sum),
+          decimals: 8,
+          symbol: "BTC",
         },
       };
+    } catch (e) {
+      const message = e instanceof Error ? e.message : String(e);
+      return {
+        ok: false,
+        error: { code: "PLUGIN_ERROR", pluginId: "bitcoin", message },
+      };
     }
-    const data = (await res.json()) as {
-      chain_stats: { funded_txo_sum: number; spent_txo_sum: number };
-    };
-    return {
-      ok: true,
-      value: {
-        amount: BigInt(data.chain_stats.funded_txo_sum - data.chain_stats.spent_txo_sum),
-        decimals: 8,
-        symbol: "BTC",
-      },
-    };
   }
 }

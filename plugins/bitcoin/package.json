@@ -15,12 +15,16 @@
     "build": "tsc --project tsconfig.json",
     "dev": "tsc --watch --project tsconfig.json",
     "test": "vitest run --config ../../vitest.config.ts",
+    "typecheck": "tsc --noEmit --project tsconfig.json",
     "lint": "eslint src/",
     "clean": "rimraf dist"
   },
   "files": [
     "src"
   ],
+  "devDependencies": {
+    "msw": "^2.7.0"
+  },
   "dependencies": {
     "@ea/common": "workspace:^",
     "@ea/types": "workspace:^",

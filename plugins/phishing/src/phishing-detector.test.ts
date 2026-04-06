@@ -28,12 +28,12 @@ describe("PhishingDetector.onPreSign", () => {
 
   it("returns block for a known scam address in the threat list", async () => {
     const result = await detector.onPreSign(
-      makeContext({ toAddress: "1ScamAddressExampleXXXXXXXXXXXXXXXX" }),
+      makeContext({ toAddress: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" }),
     );
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.value.action).toBe("block");
-      expect(result.value.message).toContain("1ScamAddressExampleXXXXXXXXXXXXXXXX");
+      expect(result.value.message).toContain("bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh");
     }
   });
 
